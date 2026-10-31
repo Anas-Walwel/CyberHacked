@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cyber Hacked Academy | أكاديمية الأمن السيبراني والاختراق الأخلاقي</title>
+<meta name="description" content="Cyber Hacked Academy منصة تعليمية عربية متخصصة في الأمن السيبراني والاختراق الأخلاقي: مسارات عملية، مختبرات افتراضية، تحديات CTF، والتحضير لشهادات OSCP." />
+<meta name="theme-color" content="#060606" />
+<link rel="icon" href="assets/logo.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#060607;
+    --bg-soft:#0a0a0c;
+    --surface:#0d0d10;
+    --surface-2:#131318;
+    --border:#1f1f26;
+    --border-strong:#2c2c36;
+    --fg:#eceef2;
+    --fg-muted:#9ba0ab;
+    --fg-dim:#6d7280;
+    --red:#e01020;
+    --red-bright:#ff2d3f;
+    --red-soft:rgba(224,16,32,.12);
+    --red-glow:rgba(255,45,63,.45);
+    --silver:#c8ccd4;
+    --silver-bright:#e9ecf1;
+    --silver-soft:rgba(200,204,212,.10);
+    --radius:14px;
+    --max:1180px;
+    --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:"IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --shadow:0 28px 80px -34px rgba(0,0,0,.95);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.026) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.026) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 95% 55% at 50% 0%, #000 25%, transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 95% 55% at 50% 0%, #000 25%, transparent 75%);
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+  :focus-visible{outline:2px solid var(--red-bright);outline-offset:3px;border-radius:6px}
+
+  .skip-link{
+    position:fixed;top:-100px;right:16px;z-index:200;
+    background:var(--red);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;
+    transition:top .2s ease;
+  }
+  .skip-link:focus{top:16px}
+
+  .wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:24px;position:relative;z-index:1}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    background:rgba(6,6,7,.8);
+    border-bottom:1px solid rgba(31,31,38,.85);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:76px}
+  .logo{display:flex;align-items:center;gap:12px;direction:ltr}
+  .logo-img{
+    width:44px;height:44px;border-radius:10px;object-fit:cover;
+    border:1px solid var(--border-strong);
+    box-shadow:0 0 22px -6px var(--red-glow),inset 0 0 0 1px rgba(255,255,255,.04);
+    background:#000;
+  }
+  .logo-text{display:flex;flex-direction:column;line-height:1.15}
+  .logo-text b{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.1em;color:var(--silver-bright)}
+  .logo-text b em{font-style:normal;color:var(--red-bright)}
+  .logo-text small{font-size:9.5px;letter-spacing:.16em;color:var(--fg-dim);font-family:var(--mono);margin-top:3px}
+
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+  .nav-links a{
+    display:block;padding:9px 13px;border-radius:8px;font-size:14px;color:var(--fg-muted);
+    transition:color .18s ease,background .18s ease;
+  }
+  .nav-links a:hover{color:var(--fg);background:rgba(255,255,255,.045)}
+
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-height:44px;padding:0 20px;border-radius:10px;border:1px solid transparent;
+    font-size:14.5px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{
+    background:linear-gradient(180deg,#e5101f,#b60a17);color:#fff;
+    box-shadow:0 0 0 1px rgba(255,45,63,.35),0 16px 36px -18px rgba(224,16,32,.95);
+  }
+  .btn-primary:hover{
+    background:linear-gradient(180deg,#ff2d3f,#cc0d1c);
+    box-shadow:0 0 0 1px rgba(255,45,63,.6),0 18px 42px -16px rgba(255,45,63,.8);
+  }
+  .btn-ghost{background:transparent;color:var(--fg);border-color:var(--border-strong)}
+  .btn-ghost:hover{background:rgba(255,255,255,.05);border-color:#3a3a46}
+  .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  .menu-toggle{
+    display:none;width:44px;height:44px;align-items:center;justify-content:center;
+    background:transparent;border:1px solid var(--border-strong);border-radius:9px;color:var(--fg);cursor:pointer;
+  }
+  .menu-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:70px 0 80px;overflow:hidden}
+  .hero::after{
+    content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);
+    width:1000px;height:640px;pointer-events:none;
+    background:radial-gradient(ellipse at center,rgba(224,16,32,.16),transparent 62%);
+    filter:blur(24px);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:56px;align-items:center}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--red-bright);border:1px solid rgba(224,16,32,.32);background:var(--red-soft);
+    padding:7px 13px;border-radius:999px;direction:ltr;
+  }
+  .pulse{width:7px;height:7px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 0 0 rgba(255,45,63,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,45,63,.55)}70%{box-shadow:0 0 0 9px rgba(255,45,63,0)}100%{box-shadow:0 0 0 0 rgba(255,45,63,0)}}
+
+  h1{
+    margin:22px 0 0;
+    font-size:clamp(2.05rem,4.5vw,3.55rem);
+    line-height:1.24;font-weight:700;letter-spacing:-.01em;
+  }
+  h1 .grad{
+    background:linear-gradient(100deg,#ff2d3f 5%,#ff6b78 40%,#c8ccd4 95%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{margin:20px 0 0;max-width:56ch;color:var(--fg-muted);font-size:16.5px;line-height:1.9}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    margin-top:40px;padding-top:28px;border-top:1px solid var(--border);
+  }
+  .stat b{
+    display:block;font-family:var(--mono);font-size:clamp(1.35rem,2.5vw,1.85rem);
+    color:var(--fg);font-weight:700;line-height:1.1;direction:ltr;text-align:right;
+  }
+  .stat b span{color:var(--red-bright)}
+  .stat small{display:block;margin-top:6px;color:var(--fg-dim);font-size:12.5px}
+
+  /* Logo card */
+  .logo-card{
+    position:relative;border:1px solid var(--border-strong);border-radius:20px;
+    background:
+      radial-gradient(circle at 50% 40%,rgba(224,16,32,.16),transparent 62%),
+      linear-gradient(180deg,#0b0b0e,#060607);
+    box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.05);
+    padding:26px;overflow:hidden;
+  }
+  .logo-card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to bottom,rgba(255,255,255,.02) 0 1px,transparent 1px 3px);
+    opacity:.55;
+  }
+  .logo-frame{
+    position:relative;border-radius:14px;overflow:hidden;
+    border:1px solid rgba(255,255,255,.07);background:#000;
+  }
+  .logo-frame img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+  .logo-meta{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:18px;padding-top:16px;border-top:1px solid var(--border);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--fg-dim);
+    direction:ltr;text-transform:uppercase;
+  }
+  .logo-meta .live{display:inline-flex;align-items:center;gap:6px;color:var(--red-bright)}
+  .logo-meta .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px var(--red-bright)}
+
+  /* ---------- Sections ---------- */
+  section{position:relative;z-index:1}
+  .section{padding:88px 0}
+  .section-head{max-width:680px;margin-bottom:44px}
+  .kicker{
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--red-bright);display:flex;align-items:center;gap:10px;direction:ltr;
+  }
+  .kicker::before{content:"";width:26px;height:1px;background:var(--red)}
+  h2{margin:14px 0 0;font-size:clamp(1.6rem,3.1vw,2.3rem);line-height:1.34;font-weight:700;letter-spacing:-.01em}
+  h2 .silver{color:var(--silver)}
+  .section-head p{margin:14px 0 0;color:var(--fg-muted);font-size:16px;line-height:1.85}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:start}
+  .about-text p{margin:0 0 16px;color:var(--fg-muted);font-size:15.5px;line-height:1.95}
+  .about-text strong{color:var(--silver-bright);font-weight:600}
+  .about-points{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px}
+  .about-points li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--fg)}
+  .about-points svg{width:18px;height:18px;stroke:var(--red-bright);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;margin-top:4px}
+
+  .vm-card{
+    border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px;
+    background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.006));
+    margin-bottom:16px;position:relative;overflow:hidden;
+  }
+  .vm-card::before{
+    content:"";position:absolute;top:0;right:0;width:3px;height:100%;
+    background:linear-gradient(180deg,var(--red),transparent);
+  }
+  .vm-card h3{margin:0 0 10px;font-size:16px;font-weight:600;display:flex;align-items:center;gap:9px}
+  .vm-card h3 svg{width:18px;height:18px;stroke:var(--red-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .vm-card p{margin:0;color:var(--fg-muted);font-size:14.5px;line-height:1.85}
+
+  /* Tracks */
+  .tracks{background:linear-gradient(180deg,transparent,rgba(255,255,255,.014),transparent)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .track{
+    position:relative;padding:25px 22px;border-radius:var(--radius);
+    background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.008));
+    border:1px solid var(--border);
+    transition:border-color .22s ease,transform .22s ease,box-shadow .22s ease,background .22s ease;
+  }
+  .track:hover{
+    border-color:rgba(224,16,32,.45);transform:translateY(-3px);
+    box-shadow:0 26px 50px -34px rgba(224,16,32,.75);
+  }
+  .track-num{
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--fg-dim);
+    display:block;margin-bottom:14px;direction:ltr;transition:color .2s ease;
+  }
+  .track:hover .track-num{color:var(--red-bright)}
+  .track-icon{
+    width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
+    background:var(--red-soft);border:1px solid rgba(224,16,32,.25);margin-bottom:16px;
+  }
+  .track-icon svg{width:20px;height:20px;stroke:var(--red-bright);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .track h3{margin:0 0 8px;font-size:16.5px;font-weight:600;line-height:1.4}
+  .track p{margin:0;color:var(--fg-muted);font-size:13.8px;line-height:1.75}
+  .track .tag{
+    display:inline-block;margin-top:15px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--fg-dim);border:1px solid var(--border-strong);
+    padding:4px 9px;border-radius:5px;direction:ltr;
+  }
+
+  /* Approach */
+  .approach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .approach{
+    padding:24px 22px;border-radius:var(--radius);border:1px solid var(--border);
+    background:rgba(255,255,255,.018);
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .approach:hover{border-color:rgba(224,16,32,.3);background:rgba(255,255,255,.03)}
+  .approach .no{
+    font-family:var(--mono);font-size:11px;color:var(--red-bright);letter-spacing:.14em;
+    display:block;margin-bottom:12px;direction:ltr;
+  }
+  .approach h4{margin:0 0 7px;font-size:15px;font-weight:600}
+  .approach p{margin:0;color:var(--fg-muted);font-size:13.5px;line-height:1.7}
+
+  /* Pillars */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+  .pillar{
+    text-align:center;padding:22px 16px;border-radius:12px;
+    border:1px solid var(--border);background:rgba(255,255,255,.016);
+  }
+  .pillar b{
+    display:block;font-family:var(--mono);font-size:15px;font-weight:700;
+    color:var(--silver-bright);letter-spacing:.02em;
+  }
+  .pillar small{display:block;margin-top:5px;color:var(--fg-dim);font-size:11.5px;letter-spacing:.04em}
+
+  /* Certifications */
+  .certs{background:linear-gradient(180deg,transparent,rgba(255,255,255,.014),transparent)}
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .cert{
+    display:flex;align-items:center;gap:15px;padding:16px 18px;border-radius:12px;
+    border:1px solid var(--border);background:rgba(255,255,255,.018);
+    transition:border-color .2s ease,background .2s ease,transform .2s ease;
+  }
+  .cert:hover{border-color:rgba(224,16,32,.35);background:rgba(255,255,255,.032);transform:translateY(-2px)}
+  .cert img{
+    width:46px;height:46px;border-radius:11px;flex:0 0 auto;object-fit:cover;
+    background:#0b0b0e;border:1px solid var(--border);
+  }
+  .cert-txt{min-width:0}
+  .cert-txt b{display:block;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--silver-bright);direction:ltr;text-align:right;line-height:1.4}
+  .cert-txt span{display:block;font-size:12px;color:var(--fg-dim);margin-top:3px;line-height:1.5}
+  .certs-foot{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+  }
+  .certs-foot p{margin:0;color:var(--fg-dim);font-size:12.5px;max-width:56ch;line-height:1.7}
+
+  /* WhatsApp */
+  .btn-wa{background:#25D366;color:#052e16;box-shadow:0 14px 34px -20px rgba(37,211,102,.9)}
+  .btn-wa:hover{background:#3ce477;box-shadow:0 16px 38px -18px rgba(37,211,102,.8)}
+  .btn-wa svg{fill:currentColor;stroke:none}
+
+  .wa-float{
+    position:fixed;left:20px;bottom:20px;z-index:90;
+    display:inline-flex;align-items:center;gap:10px;
+    min-height:52px;padding:0 18px 0 16px;border-radius:999px;
+    background:#25D366;color:#04220f;font-weight:700;font-size:14px;
+    box-shadow:0 18px 44px -16px rgba(37,211,102,.75),0 0 0 1px rgba(37,211,102,.5);
+    transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+  }
+  .wa-float:hover{background:#3ce477;transform:translateY(-2px)}
+  .wa-float svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
+  @media (max-width:640px){
+    .wa-float{left:14px;bottom:14px;padding:0 14px;min-height:50px;font-size:0}
+    .wa-float svg{width:24px;height:24px}
+  }
+
+  /* CTA band */
+  .cta-band{
+    border:1px solid var(--border-strong);border-radius:22px;overflow:hidden;
+    background:
+      radial-gradient(circle at 82% 20%,rgba(224,16,32,.16),transparent 58%),
+      linear-gradient(180deg,#0b0b0e,#070708);
+    padding:48px 44px;
+    display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;
+    box-shadow:var(--shadow);
+  }
+  .cta-band h2{margin:0;font-size:clamp(1.5rem,2.8vw,2.05rem);line-height:1.35;max-width:24ch}
+  .cta-band p{margin:12px 0 0;color:var(--fg-muted);font-size:15px;max-width:52ch}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+  /* Contact */
+  .contact-shell{
+    border:1px solid var(--border-strong);border-radius:20px;overflow:hidden;
+    background:
+      radial-gradient(circle at 88% 0%,rgba(224,16,32,.12),transparent 55%),
+      linear-gradient(180deg,#0a0a0d,#070708);
+    box-shadow:var(--shadow);
+    display:grid;grid-template-columns:.92fr 1.08fr;
+  }
+  .contact-copy{padding:44px 40px;border-left:1px solid var(--border)}
+  .contact-copy h2{margin-top:12px}
+  .contact-copy p{color:var(--fg-muted);margin:14px 0 0;font-size:15px}
+  .contact-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:13px}
+  .contact-list li{display:flex;align-items:center;gap:11px;color:var(--fg-muted);font-size:14px}
+  .contact-list svg{width:16px;height:16px;stroke:var(--red-bright);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+  .contact-list a:hover{color:var(--fg)}
+
+  form{padding:40px;display:grid;gap:16px}
+  .field{display:grid;gap:7px}
+  .field label{font-size:13px;font-weight:500;color:var(--fg-muted)}
+  .field label .req{color:var(--red-bright)}
+  .field input,.field select,.field textarea{
+    width:100%;min-height:46px;padding:11px 14px;
+    background:#060608;border:1px solid var(--border-strong);border-radius:9px;
+    color:var(--fg);font-family:inherit;font-size:14.5px;
+    transition:border-color .18s ease,box-shadow .18s ease;
+  }
+  .field textarea{min-height:100px;resize:vertical;line-height:1.7}
+  .field input::placeholder,.field textarea::placeholder{color:#565a63}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(224,16,32,.16);
+  }
+  .field.invalid input,.field.invalid select,.field.invalid textarea{border-color:#ff4d5c}
+  .error-msg{font-size:12px;color:#ff8088;display:none}
+  .field.invalid .error-msg{display:block}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .form-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:4px}
+  .form-note{font-size:11.5px;color:var(--fg-dim);line-height:1.6}
+  .form-status{font-size:13px;font-weight:600;color:#4ade80;display:none}
+  .form-status.show{display:block}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);margin-top:16px;padding:44px 0 34px;background:rgba(0,0,0,.4)}
+  .foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+  .foot p{margin:14px 0 0;color:var(--fg-dim);font-size:12.5px;max-width:46ch;line-height:1.8}
+  .foot-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--fg-muted)}
+  .foot-links a:hover{color:var(--red-bright)}
+  .foot-bottom{
+    margin-top:32px;padding-top:20px;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;color:#53565e;direction:ltr;
+  }
+  .foot-bottom .legal{font-family:var(--sans);direction:rtl;color:var(--fg-dim)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .logo-card{max-width:430px}
+    .about-grid{grid-template-columns:1fr;gap:36px}
+    .grid-3{grid-template-columns:1fr 1fr}
+    .approach-grid{grid-template-columns:1fr 1fr}
+    .pillars{grid-template-columns:1fr 1fr}
+    .cert-grid{grid-template-columns:1fr 1fr}
+    .contact-shell{grid-template-columns:1fr}
+    .contact-copy{border-left:0;border-bottom:1px solid var(--border)}
+    .cta-band{padding:38px 32px}
+  }
+  @media (max-width:860px){
+    .nav-links{
+      position:absolute;top:76px;right:0;left:0;
+      flex-direction:column;align-items:stretch;gap:4px;
+      padding:14px 24px 20px;
+      background:rgba(6,6,8,.98);border-bottom:1px solid var(--border);
+      display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:12px 14px}
+    .menu-toggle{display:inline-flex}
+    .nav-actions .btn-primary{display:none}
+    .nav-actions .btn-wa{min-height:40px;padding:0 14px;font-size:13px}
+    .nav-actions .btn-wa span{display:none}
+  }
+  @media (max-width:640px){
+    .section{padding:62px 0}
+    .hero{padding:48px 0 60px}
+    .grid-3{grid-template-columns:1fr}
+    .approach-grid{grid-template-columns:1fr}
+    .cert-grid{grid-template-columns:1fr}
+    .hero-stats{grid-template-columns:1fr 1fr;gap:16px}
+    .form-row{grid-template-columns:1fr}
+    .contact-copy{padding:32px 24px}
+    form{padding:28px 24px}
+    .cta-band{padding:32px 24px}
+    .cta-actions{width:100%}
+    .cta-actions .btn{flex:1 1 auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header>
+  <div class="wrap">
+    <nav class="nav" aria-label="التنقل الرئيسي">
+      <a class="logo" href="#" aria-label="Cyber Hacked Academy — الصفحة الرئيسية">
+        <img class="logo-img" src="assets/logo.webp" alt="شعار أكاديمية Cyber Hacked" width="44" height="44" />
+        <span class="logo-text">
+          <b>CYBER <em>HACKED</em></b>
+          <small>ACADEMY</small>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">من نحن</a></li>
+        <li><a href="#tracks">المسارات</a></li>
+        <li><a href="#certs">الشهادات</a></li>
+        <li><a href="tracks.html">المسار التعليمي</a></li>
+        <li><a href="#approach">طريقة التعلّم</a></li>
+        <li><a href="#contact">انضم إلينا</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a class="btn btn-wa" href="https://wa.me/972593239527" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5-.1.2-.1.3-.2.4l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.6-.1 1.2Z"/></svg>
+          <span>واتساب</span>
+        </a>
+        <a class="btn btn-primary" href="#contact">
+          ابدأ التعلّم
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="pulse" aria-hidden="true"></span>CYBER HACKED ACADEMY</span>
+          <h1>من الشغف إلى <span class="grad">الاحتراف</span><br />في الأمن السيبراني.</h1>
+          <p class="lead">
+            منصة تعليمية عربية متخصصة في الأمن السيبراني والاختراق الأخلاقي. نبني جيلاً واعياً ومتمكناً
+            عبر التدريب التفاعلي والمختبرات الافتراضية والسيناريوهات الواقعية وتحديات CTF.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#tracks">
+              استكشف المسارات
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#about">تعرّف علينا</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><b>9<span>+</span></b><small>مسارات تدريبية متخصصة</small></div>
+            <div class="stat"><b>100<span>%</span></b><small>تعلّم عملي وتطبيقي</small></div>
+            <div class="stat"><b>OSCP</b><small>مسار تحضيري للشهادات</small></div>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-frame">
+            <img src="assets/logo.webp" alt="شعار أكاديمية Cyber Hacked — حرفا CH بلمسة تقنية" width="1024" height="1024" />
+          </div>
+          <div class="logo-meta">
+            <span class="live">ACADEMY ONLINE</span>
+            <span>AR / EN · EST. 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <span class="kicker">ABOUT US</span>
+          <h2>من نحن؟</h2>
+          <p style="margin-top:18px">
+            <strong>أكاديمية Cyber Hacked</strong> هي منصة تعليمية عربية متخصصة في مجال الأمن السيبراني
+            والاختراق الأخلاقي، تهدف إلى بناء جيل عربي واعٍ ومتمكن من المهارات التقنية والأمنية،
+            وقادر على مواكبة التطور المتسارع في عالم التكنولوجيا والأمن الرقمي.
+          </p>
+          <p>
+            نؤمن بأن تعلّم الأمن السيبراني لا يقتصر على الجانب النظري، بل يحتاج إلى الممارسة والتطبيق العملي،
+            ولذلك نعتمد على التدريب التفاعلي، والمختبرات الافتراضية، والسيناريوهات الواقعية، والتحديات التقنية
+            التي تساعد المتدربين على اكتساب الخبرة والمهارات اللازمة.
+          </p>
+          <ul class="about-points">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>محتوى عربي أصيل موجه للمتعلّم العربي</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>مختبرات افتراضية آمنة للتطبيق دون قيود</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>مسارات متدرجة من الأساسيات إلى المستوى الهجومي المتقدم</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>تحديات CTF وسيناريوهات واقعية تحاكي بيئات العمل</span></li>
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <div class="vm-card">
+            <h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/></svg>رؤيتنا</h3>
+            <p>أن نكون جزءاً من بناء مجتمع عربي تقني يمتلك المعرفة والمهارات اللازمة لفهم التهديدات السيبرانية، واكتشاف الثغرات، والمساهمة في حماية العالم الرقمي.</p>
+          </div>
+          <div class="vm-card">
+            <h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2Z"/></svg>رسالتنا</h3>
+            <p>تحويل الشغف بالتكنولوجيا إلى معرفة، والمعرفة إلى مهارات عملية، والمهارات إلى كفاءات قادرة على المنافسة في عالم الأمن السيبراني.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACKS -->
+  <section class="section tracks" id="tracks">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">LEARNING TRACKS</span>
+        <h2>ماذا نقدّم؟ <span class="silver">مسارات تدريبية متخصصة</span></h2>
+        <p>كل مسار مبني على تدرّج واضح: مفهوم، ثم تطبيق في مختبر، ثم تحدٍّ واقعي يقيس ما تعلّمته.</p>
+        <div style="margin-top:22px">
+          <a class="btn btn-ghost" href="tracks.html">
+            المسار التعليمي الكامل — 12 مساراً
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="track reveal">
+          <span class="track-num">TRACK / 01</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/></svg></div>
+          <h3>أساسيات الأمن السيبراني</h3>
+          <p>المفاهيم الأساسية، نموذج CIA، أنواع التهديدات، ومبادئ الحماية قبل الدخول إلى المسارات الهجومية.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 02</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18s3-1 3-6 3-6 3-6"/><path d="M4 20h16"/><circle cx="8" cy="7" r="2.5"/></svg></div>
+          <h3>الاختراق الأخلاقي</h3>
+          <p>Ethical Hacking من الصفر: منهجية التفكير الهجومي، الأخلاقيات، والحدود القانونية لكل اختبار.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 03</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h3M8 17h6"/></svg></div>
+          <h3>اختبار اختراق الأنظمة والتطبيقات</h3>
+          <p>Penetration Testing على الويب والتطبيقات: الاستغلال، تقييم الأثر، وتوثيق النتائج باحترافية.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 04</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <h3>أمن الشبكات</h3>
+          <p>Network Security: تحليل الترافيك، تقسيم الشبكات، الجدران النارية، وكشف الحركة الجانبية.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 05</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h6M7 12h4M18 8h.01M18 12h.01M9 21h6"/></svg></div>
+          <h3>أنظمة Linux وWindows</h3>
+          <p>إدارة الأنظمة من منظور أمني: الصلاحيات، الخدمات، السجلات، والتحصين الأساسي لكل نظام.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 06</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg></div>
+          <h3>الاستطلاع وجمع المعلومات</h3>
+          <p>Reconnaissance: رسم سطح الهجوم، البصمة التقنية، والاستطلاع السلبي والنشط بأدوات احترافية.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 07</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <h3>اكتشاف الثغرات وتحليلها</h3>
+          <p>كيف تنشأ الثغرة، كيف تُكتشف، وكيف تُصنَّف وتُقيّم خطورتها وفق معايير معتمدة.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 08</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v6a4 4 0 0 0 8 0V3"/><path d="M9 13v3a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="11" r="2"/></svg></div>
+          <h3>تحديات الأمن السيبراني (CTF)</h3>
+          <p>تحديات عملية متدرجة الصعوبة: Web، Crypto، Forensics، Pwn، وReverse — مع حلول مشروحة.</p>
+        </article>
+
+        <article class="track reveal">
+          <span class="track-num">TRACK / 09</span>
+          <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 6h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3"/></svg></div>
+          <h3>الأمن الهجومي والتحضير للشهادات</h3>
+          <p>مسار متقدم يستهدف شهادات مثل OSCP: تفكير هجومي، تقارير، وسيناريوهات اختبار واقعية.</p>
+          <span class="tag">OSCP · OSEP · CRTO</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section certs" id="certs">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">CERTIFICATIONS</span>
+        <h2>شهادات نقدّمها <span class="silver">ونحضّر لها</span></h2>
+        <p>برامج تحضيرية معتمدة على مسارات الشهادات المهنية الأكثر طلباً في سوق الأمن السيبراني، بمختبرات عملية ومحاكاة امتحانات.</p>
+      </div>
+
+      <div class="cert-grid">
+        <div class="cert reveal">
+          <img src="assets/badges/google.svg" alt="شعار شهادة Google Cybersecurity Professional" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>Google Cybersecurity</b><span>الأمن السيبراني — Google</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/cisco.svg" alt="شعار شهادة Cisco Ethical Hacking" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>Cisco Ethical Hacking</b><span>الاختراق الأخلاقي — Cisco</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/oscp.svg" alt="شعار شهادة OSCP" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>OSCP</b><span>Offensive Security Certified Professional</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/ejpt.svg" alt="شعار شهادة eJPT" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>eJPT</b><span>eLearnSecurity Junior Penetration Tester</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/pt1.svg" alt="شعار شهادة PT1" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>PT1</b><span>Practical Penetration Tester</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/ceh.svg" alt="شعار شهادة CEH" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>CEH</b><span>Certified Ethical Hacker — EC-Council</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/pnpt.svg" alt="شعار شهادة PNPT" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>PNPT</b><span>Practical Network Penetration Tester</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/security-plus.svg" alt="شعار شهادة CompTIA Security+" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>Security+</b><span>أساسيات الأمن السيبراني — CompTIA</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/ccna.svg" alt="شعار شهادة Cisco CCNA" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>CCNA</b><span>الشبكات — Cisco</span></div>
+        </div>
+        <div class="cert reveal">
+          <img src="assets/badges/klcp.svg" alt="شعار شهادة KLCP" width="46" height="46" loading="lazy" />
+          <div class="cert-txt"><b>KLCP</b><span>Kali Linux Certified Professional</span></div>
+        </div>
+      </div>
+
+      <div class="certs-foot reveal">
+        <p>يغطي مسار التحضير للشهادات المحتوى التقني كاملاً مع جلسات مراجعة ومحاكاة امتحان. الشهادات الصادرة عن جهاتها الأصلية فقط، والأكاديمية تقدّم التحضير لا الإصدار.</p>
+        <a class="btn btn-ghost" href="tracks.html">
+          اطّلع على المسار الكامل
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">HOW WE TEACH</span>
+        <h2>لا نظريّة بلا تطبيق</h2>
+        <p>منهجيتنا تقوم على أربع ركائز تجعل المتدرب يخرج بمهارة قابلة للاستخدام في بيئة عمل حقيقية.</p>
+      </div>
+
+      <div class="approach-grid">
+        <div class="approach reveal">
+          <span class="no">/ 01</span>
+          <h4>تدريب تفاعلي</h4>
+          <p>تعلّم بالممارسة لا بالمشاهدة، مع تمارين تُنجَز خطوة بخطوة داخل المحتوى.</p>
+        </div>
+        <div class="approach reveal">
+          <span class="no">/ 02</span>
+          <h4>مختبرات افتراضية</h4>
+          <p>بيئات معزولة وآمنة تُمارس فيها الهجوم دون أي مخاطرة قانونية أو تشغيلية.</p>
+        </div>
+        <div class="approach reveal">
+          <span class="no">/ 03</span>
+          <h4>سيناريوهات واقعية</h4>
+          <p>مواقف مبنية على حوادث حقيقية تشبه ما ستواجهه في العمل الفعلي.</p>
+        </div>
+        <div class="approach reveal">
+          <span class="no">/ 04</span>
+          <h4>تحديات تقنية</h4>
+          <p>تحديات متدرجة تقيس تقدّمك وتحوّل ما تعلّمته إلى مهارة راسخة.</p>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar"><b>تعلّم</b><small>أساس متين</small></div>
+        <div class="pillar"><b>طبّق</b><small>مختبر فعلي</small></div>
+        <div class="pillar"><b>اكتشف</b><small>ثغرات وتحليل</small></div>
+        <div class="pillar"><b>احمِ</b><small>أثر حقيقي</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="section" id="vision">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <span class="kicker">OUR VISION</span>
+          <h2 style="margin-top:14px">جيل عربي واعٍ، نحو عالم الأمن السيبراني والاختراق الأخلاقي.</h2>
+          <p>
+            نعمل على بناء مجتمع تقني يمتلك المعرفة والمهارات اللازمة لفهم التهديدات السيبرانية،
+            واكتشاف الثغرات، والمساهمة في حماية العالم الرقمي.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="#contact">
+            انضم إلى الأكاديمية
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="tracks.html">المسار التعليمي الكامل</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-shell">
+        <div class="contact-copy">
+          <span class="kicker">JOIN US</span>
+          <h2>ابدأ رحلتك في الأمن السيبراني</h2>
+          <p>أخبرنا بمستواك وهدفك، ونساعدك على اختيار المسار الأنسب لك خلال يوم عمل واحد.</p>
+          <ul class="contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+              <a href="mailto:hello@cyberhacked.academy">hello@cyberhacked.academy</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+              <a href="https://wa.me/972593239527" target="_blank" rel="noopener" dir="ltr">+972 59 323 9527</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v18H6.5A2.5 2.5 0 0 1 4 19.5Z"/><path d="M8 7h7M8 11h7"/></svg>
+              <span>12 مساراً من الأساسيات إلى مستوى OSCP</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span>رد أولي خلال 24 ساعة</span>
+            </li>
+          </ul>
+        </div>
+
+        <form id="joinForm" novalidate>
+          <div class="form-row">
+            <div class="field" data-field>
+              <label for="name">الاسم الكامل <span class="req">*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="اسمك" required />
+              <span class="error-msg" role="alert">الرجاء إدخال الاسم.</span>
+            </div>
+            <div class="field" data-field>
+              <label for="email">البريد الإلكتروني <span class="req">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="name@email.com" dir="ltr" required />
+              <span class="error-msg" role="alert">الرجاء إدخال بريد إلكتروني صحيح.</span>
+            </div>
+          </div>
+
+          <div class="field" data-field>
+            <label for="level">مستواك الحالي <span class="req">*</span></label>
+            <select id="level" name="level" required>
+              <option value="" selected disabled>اختر مستواك</option>
+              <option>مبتدئ تماماً</option>
+              <option>لدي أساسيات تقنية</option>
+              <option>أعمل في تقنية المعلومات</option>
+              <option>ممارس أمن سيبراني</option>
+            </select>
+            <span class="error-msg" role="alert">الرجاء اختيار مستواك.</span>
+          </div>
+
+          <div class="field" data-field>
+            <label for="track">المسار المهتم به <span class="req">*</span></label>
+            <select id="track" name="track" required>
+              <option value="" selected disabled>اختر المسار</option>
+              <option>أساسيات الحاسوب والشبكات</option>
+              <option>أساسيات الأمن السيبراني</option>
+              <option>الأمن الهجومي والاختراق الأخلاقي</option>
+              <option>اختبار اختراق تطبيقات الويب</option>
+              <option>اختبار اختراق الشبكات</option>
+              <option>أمن Windows وActive Directory</option>
+              <option>أمن أنظمة Linux</option>
+              <option>تحليل البرمجيات الخبيثة والهندسة العكسية</option>
+              <option>الاستخبارات مفتوحة المصدر OSINT</option>
+              <option>الأمن الدفاعي وSOC</option>
+              <option>البرمجة والسكربتات للأمن السيبراني</option>
+              <option>التحضير للشهادات الاحترافية</option>
+              <option>غير متأكد — أحتاج استشارة</option>
+            </select>
+            <span class="error-msg" role="alert">الرجاء اختيار المسار.</span>
+          </div>
+
+          <div class="field" data-field>
+            <label for="notes">ملاحظات إضافية</label>
+            <textarea id="notes" name="notes" placeholder="هدفك من التعلّم، الوقت المتاح أسبوعياً، أي خبرة سابقة..."></textarea>
+          </div>
+
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit">
+              أرسل الطلب
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <span class="form-status" id="formStatus" role="status" aria-live="polite">تم استلام طلبك. سنتواصل معك خلال 24 ساعة.</span>
+          </div>
+          <p class="form-note">بالإرسال أنت توافق على سياسة الخصوصية. لا نشارك بياناتك مع أي طرف ثالث.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#" aria-label="Cyber Hacked Academy">
+          <img class="logo-img" src="assets/logo.webp" alt="شعار أكاديمية Cyber Hacked" width="44" height="44" />
+          <span class="logo-text">
+            <b>CYBER <em>HACKED</em></b>
+            <small>ACADEMY</small>
+          </span>
+        </a>
+        <p>جيل عربي واعٍ، نحو عالم الأمن السيبراني والاختراق الأخلاقي. تعلّم | طبّق | اكتشف | احمِ</p>
+      </div>
+
+      <div class="foot-links">
+        <a href="#about">من نحن</a>
+        <a href="#tracks">المسارات</a>
+        <a href="#certs">الشهادات</a>
+        <a href="tracks.html">المسار التعليمي</a>
+        <a href="#contact">انضم إلينا</a>
+        <a href="https://wa.me/972593239527" target="_blank" rel="noopener">واتساب</a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span class="legal">© 2026 Cyber Hacked Academy. جميع الحقوق محفوظة. كل المحتوى مخصص للتعلّم الأخلاقي والقانوني فقط.</span>
+      <span>CYBER HACKED · BUILD 2026.10</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/972593239527" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب: 00972593239527">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5-.1.2-.1.3-.2.4l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.6-.1 1.2Z"/></svg>
+  <span>واتساب</span>
+</a>
+
+<script>
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var toggle = document.getElementById("menuToggle");
+  var navLinks = document.getElementById("navLinks");
+
+  if (toggle && navLinks) {
+    toggle.addEventListener("click", function () {
+      var open = navLinks.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "إغلاق القائمة" : "فتح القائمة");
+    });
+
+    navLinks.addEventListener("click", function (e) {
+      if (e.target.closest("a")) {
+        navLinks.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "فتح القائمة");
+      }
+    });
+  }
+
+  var reveals = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          setTimeout(function () { el.classList.add("in"); }, (i % 6) * 60);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  var form = document.getElementById("joinForm");
+  var status = document.getElementById("formStatus");
+  if (!form) return;
+
+  function fieldOf(input) { return input.closest(".field"); }
+
+  function validate(input) {
+    var field = fieldOf(input);
+    var ok = input.checkValidity();
+    if (input.tagName === "SELECT") ok = !!input.value;
+    field.classList.toggle("invalid", !ok);
+    return ok;
+  }
+
+  form.querySelectorAll("input, select, textarea").forEach(function (input) {
+    input.addEventListener("blur", function () {
+      if (input.value !== "" || input.required) validate(input);
+    });
+    input.addEventListener("input", function () {
+      if (fieldOf(input).classList.contains("invalid")) validate(input);
+    });
+    input.addEventListener("change", function () {
+      if (fieldOf(input).classList.contains("invalid")) validate(input);
+    });
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var inputs = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"));
+    var firstInvalid = null;
+    inputs.forEach(function (input) {
+      if (!validate(input) && !firstInvalid) firstInvalid = input;
+    });
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    var original = btn.innerHTML;
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+    btn.textContent = "جارٍ الإرسال...";
+
+    setTimeout(function () {
+      btn.disabled = false;
+      btn.style.opacity = "";
+      btn.innerHTML = original;
+      status.classList.add("show");
+      form.reset();
+      form.querySelectorAll(".field.invalid").forEach(function (f) {
+        f.classList.remove("invalid");
+      });
+      setTimeout(function () { status.classList.remove("show"); }, 6000);
+    }, 1100);
+  });
+})();
+</script>
+</body>
+</html>
