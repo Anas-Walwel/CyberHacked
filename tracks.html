@@ -70,6 +70,13 @@
   .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .btn-wa svg{fill:currentColor;stroke:none}
 
+  /* ===== Discord ===== */
+  .btn-dc{position:relative;overflow:hidden;background:linear-gradient(180deg,#6b77ff,#4752c4);color:#fff;box-shadow:0 0 0 1px rgba(107,119,255,.45),0 16px 36px -18px rgba(88,101,242,.95)}
+  .btn-dc:hover{background:linear-gradient(180deg,#7d88ff,#5865f2);box-shadow:0 0 0 1px rgba(125,136,255,.7),0 18px 42px -16px rgba(88,101,242,.9)}
+  .btn-dc svg{fill:currentColor;stroke:none}
+  .btn-dc::after{content:"";position:absolute;top:0;bottom:0;width:60%;left:-80%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:sweep 4.5s ease-in-out infinite}
+  @keyframes sweep{0%,60%{left:-80%}100%{left:140%}}
+
   .wa-float{
     position:fixed;left:20px;bottom:20px;z-index:90;
     display:inline-flex;align-items:center;gap:10px;
@@ -80,10 +87,23 @@
   }
   .wa-float:hover{background:#3ce477;transform:translateY(-2px)}
   .wa-float svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
+
+  .dc-float{position:fixed;left:20px;bottom:84px;z-index:90;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 18px 0 16px;border-radius:999px;background:#5865f2;color:#fff;font-weight:700;font-size:14px;box-shadow:0 18px 44px -16px rgba(88,101,242,.8),0 0 0 1px rgba(125,136,255,.5);transition:transform .2s,background .2s}
+  .dc-float:hover{background:#6b77ff;transform:translateY(-2px)}
+  .dc-float svg{width:22px;height:22px;fill:currentColor;flex:0 0 auto}
+  .dc-float::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(125,136,255,.7);animation:ping 2.6s ease-out infinite;pointer-events:none}
+  @keyframes ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+
   @media (max-width:640px){
     .wa-float{left:14px;bottom:14px;padding:0 14px;min-height:50px;font-size:0}
     .wa-float svg{width:24px;height:24px}
+    .dc-float{left:14px;bottom:76px;padding:0 14px;min-height:50px;font-size:0}
+    .dc-float svg{width:24px;height:24px}
+    .hide-sm{display:none}
   }
+
+  /* شريط التقدّم */
+  .progress{position:fixed;top:0;right:0;height:2px;width:0;z-index:150;background:linear-gradient(270deg,#ff2d3f,#5865f2);box-shadow:0 0 12px var(--red-glow)}
 
   /* Page hero */
   .page-hero{padding:58px 0 10px;position:relative;overflow:hidden}
@@ -123,11 +143,21 @@
   }
   .track-item:hover .track-node{border-color:rgba(224,16,32,.55);color:var(--red-bright);box-shadow:0 0 0 7px rgba(224,16,32,.07)}
 
+  /* ظهور تدريجي */
+  .js .track-item{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .js .track-item.in{opacity:1;transform:none}
+  .track-item.in .track-node{animation:nodeIn .9s ease both}
+  @keyframes nodeIn{0%{box-shadow:0 0 0 0 rgba(224,16,32,.55)}100%{box-shadow:0 0 0 18px rgba(224,16,32,0)}}
+
   .track-card{
+    position:relative;overflow:hidden;
     border:1px solid var(--border);border-radius:var(--radius);
     background:linear-gradient(180deg,rgba(255,255,255,.026),rgba(255,255,255,.006));
     padding:24px 26px;transition:border-color .22s ease,background .22s ease;
   }
+  /* بقعة ضوء تتبع الماوس */
+  .track-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(224,16,32,.15),transparent 60%)}
+  .track-card:hover::before{opacity:1}
   .track-item:hover .track-card{border-color:rgba(224,16,32,.38);background:linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.008))}
   .track-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .track-card h2{margin:0;font-size:19px;font-weight:600;line-height:1.45}
@@ -172,6 +202,21 @@
   .cert-table tr:last-child td{border-bottom:0}
   .cert-badge{width:28px;height:28px;border-radius:7px;display:inline-block;vertical-align:middle;margin-inline-end:10px;border:1px solid var(--border)}
 
+  /* بطاقة المجتمع بأسلوب التيرمنال */
+  .dc-band{margin-top:26px;border:1px solid var(--border-strong);border-radius:22px;overflow:hidden;background:#08080b;box-shadow:var(--shadow)}
+  .dc-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--border);direction:ltr;background:rgba(255,255,255,.02)}
+  .dc-bar i{width:10px;height:10px;border-radius:50%;background:#2c2c36}
+  .dc-bar i:nth-child(1){background:#e01020}
+  .dc-bar i:nth-child(2){background:#c8ccd4}
+  .dc-bar i:nth-child(3){background:#5865f2}
+  .dc-bar span{margin-inline-start:10px;font-family:var(--mono);font-size:11px;color:var(--fg-dim)}
+  .dc-body{padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:radial-gradient(circle at 12% 30%,rgba(88,101,242,.18),transparent 55%)}
+  .dc-cmd{font-family:var(--mono);font-size:13px;color:#8d96ff;direction:ltr;text-align:left;margin:0}
+  .dc-cmd::after{content:"▍";margin-inline-start:4px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .dc-body h2{margin:10px 0 0;font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.4}
+  .dc-body p.dc-desc{margin:8px 0 0;color:var(--fg-muted);font-size:14.5px;max-width:50ch}
+
   /* CTA */
   .cta-band{
     border:1px solid var(--border-strong);border-radius:22px;overflow:hidden;
@@ -188,6 +233,7 @@
   .foot p{margin:14px 0 0;color:var(--fg-dim);font-size:12.5px;max-width:46ch;line-height:1.8}
   .foot-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--fg-muted)}
   .foot-links a:hover{color:var(--red-bright)}
+  .foot-links a.dc-link:hover{color:#8d96ff}
   .foot-bottom{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:#53565e;direction:ltr}
   .foot-bottom .legal{font-family:var(--sans);direction:rtl;color:var(--fg-dim)}
 
@@ -198,26 +244,39 @@
     .track-card{padding:20px 18px}
     .topics{grid-template-columns:1fr}
     .cta-band{padding:32px 24px}
+    .dc-body{padding:24px 20px}
     .cta-actions{width:100%}
     .cta-actions .btn{flex:1 1 auto}
   }
   @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .js .track-item{opacity:1;transform:none}
   }
 </style>
 </head>
 <body>
+
+<!-- أيقونة Discord (تُعرَّف مرة واحدة) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-dc" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.292a.074.074 0 0 1 .078-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .079.009c.12.1.245.199.373.293a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></symbol>
+</svg>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 
 <header>
   <div class="wrap">
     <nav class="nav" aria-label="التنقل الرئيسي">
       <a class="logo" href="index.html" aria-label="Cyber Hacked Academy — الصفحة الرئيسية">
-        <img class="logo-img" src="assets/logo.webp" alt="شعار أكاديمية Cyber Hacked" width="42" height="42" />
+        <img class="logo-img" src="logo.webp" alt="شعار أكاديمية Cyber Hacked" width="42" height="42" />
         <span class="logo-text"><b>CYBER <em>HACKED</em></b><small>ACADEMY</small></span>
       </a>
       <div class="nav-actions">
         <a class="btn btn-ghost" href="index.html">الصفحة الرئيسية</a>
+        <a class="btn btn-dc" href="https://discord.gg/Qp74tEubT" target="_blank" rel="noopener" aria-label="انضم إلى مجتمعنا على ديسكورد">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dc"/></svg>
+          <span class="hide-sm">ديسكورد</span>
+        </a>
         <a class="btn btn-primary" href="https://wa.me/972593239527" target="_blank" rel="noopener">
           واتساب
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5-.1.2-.1.3-.2.4l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.6-.1 1.2Z"/></svg>
@@ -687,21 +746,37 @@
                 <tr><th scope="col">الشهادة</th><th scope="col">التخصص</th></tr>
               </thead>
               <tbody>
-                <tr><td><img class="cert-badge" src="assets/badges/cisco.svg" alt="" width="28" height="28" loading="lazy" />Cisco Ethical Hacker</td><td>الاختراق الأخلاقي</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/ceh.svg" alt="" width="28" height="28" loading="lazy" />CEH</td><td>الاختراق الأخلاقي</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/ejpt.svg" alt="" width="28" height="28" loading="lazy" />eJPT</td><td>اختبار الاختراق</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/pnpt.svg" alt="" width="28" height="28" loading="lazy" />PNPT</td><td>اختبار اختراق الشبكات الداخلية</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/oscp.svg" alt="" width="28" height="28" loading="lazy" />OSCP</td><td>اختبار الاختراق الاحترافي</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/security-plus.svg" alt="" width="28" height="28" loading="lazy" />Security+</td><td>أساسيات الأمن السيبراني</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/google.svg" alt="" width="28" height="28" loading="lazy" />Google Cybersecurity</td><td>الأمن السيبراني</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/ccna.svg" alt="" width="28" height="28" loading="lazy" />CCNA</td><td>الشبكات</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/klcp.svg" alt="" width="28" height="28" loading="lazy" />KLCP</td><td>Kali Linux</td></tr>
-                <tr><td><img class="cert-badge" src="assets/badges/pt1.svg" alt="" width="28" height="28" loading="lazy" />PT1</td><td>اختبار الاختراق العملي</td></tr>
+                <tr><td><img class="cert-badge" src="cisco.svg" alt="" width="28" height="28" loading="lazy" />Cisco Ethical Hacker</td><td>الاختراق الأخلاقي</td></tr>
+                <tr><td><img class="cert-badge" src="ceh.svg" alt="" width="28" height="28" loading="lazy" />CEH</td><td>الاختراق الأخلاقي</td></tr>
+                <tr><td><img class="cert-badge" src="ejpt.svg" alt="" width="28" height="28" loading="lazy" />eJPT</td><td>اختبار الاختراق</td></tr>
+                <tr><td><img class="cert-badge" src="pnpt.svg" alt="" width="28" height="28" loading="lazy" />PNPT</td><td>اختبار اختراق الشبكات الداخلية</td></tr>
+                <tr><td><img class="cert-badge" src="oscp.svg" alt="" width="28" height="28" loading="lazy" />OSCP</td><td>اختبار الاختراق الاحترافي</td></tr>
+                <tr><td><img class="cert-badge" src="security-plus.svg" alt="" width="28" height="28" loading="lazy" />Security+</td><td>أساسيات الأمن السيبراني</td></tr>
+                <tr><td><img class="cert-badge" src="google.svg" alt="" width="28" height="28" loading="lazy" />Google Cybersecurity</td><td>الأمن السيبراني</td></tr>
+                <tr><td><img class="cert-badge" src="ccna.svg" alt="" width="28" height="28" loading="lazy" />CCNA</td><td>الشبكات</td></tr>
+                <tr><td><img class="cert-badge" src="klcp.svg" alt="" width="28" height="28" loading="lazy" />KLCP</td><td>Kali Linux</td></tr>
+                <tr><td><img class="cert-badge" src="pt1.svg" alt="" width="28" height="28" loading="lazy" />PT1</td><td>اختبار الاختراق العملي</td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </article>
+
+      <!-- Discord community -->
+      <div class="dc-band">
+        <div class="dc-bar"><i></i><i></i><i></i><span>cyberhacked@community:~</span></div>
+        <div class="dc-body">
+          <div>
+            <p class="dc-cmd">$ join --community discord</p>
+            <h2>انضم لمجتمعنا على ديسكورد</h2>
+            <p class="dc-desc">اسأل، شارك مختبراتك، وتعلّم مع طلاب ومتخصصين يمشون على نفس المسار.</p>
+          </div>
+          <a class="btn btn-dc" href="https://discord.gg/Qp74tEubT" target="_blank" rel="noopener">
+            انضم الآن
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dc"/></svg>
+          </a>
+        </div>
+      </div>
 
       <div class="cta-band">
         <div>
@@ -725,7 +800,7 @@
     <div class="foot">
       <div>
         <a class="logo" href="index.html" aria-label="Cyber Hacked Academy">
-          <img class="logo-img" src="assets/logo.webp" alt="شعار أكاديمية Cyber Hacked" width="42" height="42" />
+          <img class="logo-img" src="logo.webp" alt="شعار أكاديمية Cyber Hacked" width="42" height="42" />
           <span class="logo-text"><b>CYBER <em>HACKED</em></b><small>ACADEMY</small></span>
         </a>
         <p>جيل عربي واعٍ، نحو عالم الأمن السيبراني والاختراق الأخلاقي. تعلّم | طبّق | اكتشف | احمِ</p>
@@ -735,6 +810,7 @@
         <a href="index.html#about">من نحن</a>
         <a href="index.html#certs">الشهادات</a>
         <a href="index.html#contact">انضم إلينا</a>
+        <a class="dc-link" href="https://discord.gg/Qp74tEubT" target="_blank" rel="noopener">ديسكورد</a>
         <a href="https://wa.me/972593239527" target="_blank" rel="noopener">واتساب</a>
       </div>
     </div>
@@ -745,6 +821,11 @@
   </div>
 </footer>
 
+<a class="dc-float" href="https://discord.gg/Qp74tEubT" target="_blank" rel="noopener" aria-label="انضم إلى مجتمعنا على ديسكورد">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dc"/></svg>
+  <span>ديسكورد</span>
+</a>
+
 <a class="wa-float" href="https://wa.me/972593239527" target="_blank" rel="noopener" aria-label="تواصل معنا على واتساب: 00972593239527">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5-.1.2-.1.3-.2.4l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.3.1.2.1.6-.1 1.2Z"/></svg>
   <span>واتساب</span>
@@ -753,6 +834,8 @@
 <script>
 (function () {
   "use strict";
+
+  document.documentElement.classList.add("js");
 
   var filters = document.querySelectorAll(".filter");
   var items = document.querySelectorAll(".track-item");
@@ -770,6 +853,32 @@
       });
     });
   });
+
+  // ظهور تدريجي للمسارات
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 }) : null;
+  items.forEach(function (i) { if (io) { io.observe(i); } else { i.classList.add("in"); } });
+
+  // بقعة ضوء تتبع الماوس على البطاقات
+  document.querySelectorAll(".track-card").forEach(function (c) {
+    c.addEventListener("pointermove", function (e) {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      c.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+
+  // شريط تقدّم القراءة
+  var bar = document.getElementById("progress");
+  function prog() {
+    var h = document.documentElement;
+    bar.style.width = (h.scrollTop / ((h.scrollHeight - h.clientHeight) || 1) * 100) + "%";
+  }
+  addEventListener("scroll", prog, { passive: true });
+  prog();
 })();
 </script>
 </body>
