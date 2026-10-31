@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="CEH Certified Ethical Hacker">
+  <rect width="72" height="72" rx="16" fill="#0b0b0e"/>
+  <rect x=".75" y=".75" width="70.5" height="70.5" rx="15.25" fill="none" stroke="#2c2c36" stroke-width="1.5"/>
+  <path d="M36 12l15 5v13c0 10-6.7 17.6-15 20-8.3-2.4-15-10-15-20V17l15-5Z" fill="none" stroke="#e01020" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="36" y="36" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#ff2d3f">CEH</text>
+  <path d="M29 42l14-14" stroke="#ff6b78" stroke-width="2.2" stroke-linecap="round"/>
+  <text x="36" y="62" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="6" font-weight="600" letter-spacing="1" fill="#8b8f99">EC-COUNCIL</text>
+</svg>

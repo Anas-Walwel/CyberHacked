@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="OSCP Offensive Security Certified Professional">
+  <rect width="72" height="72" rx="16" fill="#0b0b0e"/>
+  <rect x=".75" y=".75" width="70.5" height="70.5" rx="15.25" fill="none" stroke="#2c2c36" stroke-width="1.5"/>
+  <path d="M36 10l17 6v14c0 11-7.6 19.4-17 22-9.4-2.6-17-11-17-22V16l17-6Z" fill="none" stroke="#ff6b00" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M36 17l11 4v9c0 7.2-5 12.7-11 14.6C30 42.7 25 37.2 25 30v-9l11-4Z" fill="#ff6b00" opacity=".13"/>
+  <text x="36" y="34" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".5" fill="#ff6b00">OSCP</text>
+  <path d="M27 39l6 6 12-13" fill="none" stroke="#ff8a3d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="36" y="61" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="6.4" font-weight="600" letter-spacing="1.1" fill="#8b8f99">OFFSEC</text>
+</svg>

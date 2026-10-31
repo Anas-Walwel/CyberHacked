@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="CompTIA Security Plus">
+  <rect width="72" height="72" rx="16" fill="#0b0b0e"/>
+  <rect x=".75" y=".75" width="70.5" height="70.5" rx="15.25" fill="none" stroke="#2c2c36" stroke-width="1.5"/>
+  <rect x="15" y="15" width="42" height="42" rx="9" fill="none" stroke="#ff2d3f" stroke-width="2.2"/>
+  <text x="36" y="34" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" letter-spacing=".6" fill="#e6e9ee">CompTIA</text>
+  <text x="36" y="47" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#ff2d3f">SEC+</text>
+  <text x="36" y="65" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="6" font-weight="600" letter-spacing="1" fill="#8b8f99">SECURITY+</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="Google Cybersecurity Professional Certificate">
+  <rect width="72" height="72" rx="16" fill="#0b0b0e"/>
+  <rect x=".75" y=".75" width="70.5" height="70.5" rx="15.25" fill="none" stroke="#2c2c36" stroke-width="1.5"/>
+  <circle cx="36" cy="34" r="13.5" fill="none" stroke="#2c2c36" stroke-width="5"/>
+  <path d="M36 20.5a13.5 13.5 0 0 1 11.7 6.75" fill="none" stroke="#ea4335" stroke-width="5" stroke-linecap="round"/>
+  <path d="M47.7 27.25a13.5 13.5 0 0 1 0 13.5" fill="none" stroke="#fbbc05" stroke-width="5" stroke-linecap="round"/>
+  <path d="M47.7 40.75A13.5 13.5 0 0 1 36 47.5" fill="none" stroke="#34a853" stroke-width="5" stroke-linecap="round"/>
+  <path d="M36 47.5a13.5 13.5 0 0 1-11.7-6.75" fill="none" stroke="#4285f4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M24.3 40.75a13.5 13.5 0 0 1 0-13.5" fill="none" stroke="#4285f4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M36 20.5v13.5h10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+  <circle cx="36" cy="34" r="4.5" fill="#0b0b0e"/>
+  <circle cx="36" cy="34" r="2.4" fill="#fff"/>
+  <text x="36" y="64" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="6.4" font-weight="600" letter-spacing=".7" fill="#8b8f99">GOOGLE</text>
+</svg>

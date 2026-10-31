@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-label="KLCP Kali Linux Certified Professional">
+  <rect width="72" height="72" rx="16" fill="#0b0b0e"/>
+  <rect x=".75" y=".75" width="70.5" height="70.5" rx="15.25" fill="none" stroke="#2c2c36" stroke-width="1.5"/>
+  <path d="M20 24c0-4 4-7 9-7s8 3 8 7c0 5-3 7-3 11l6 10c1 2 0 4-2 4H22c-2 0-3-2-2-4l5-9c-3-2-5-6-5-12Z" fill="none" stroke="#5b8cff" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="28" cy="24" r="1.8" fill="#5b8cff"/>
+  <circle cx="36" cy="24" r="1.8" fill="#5b8cff"/>
+  <text x="36" y="64" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="7.4" font-weight="800" letter-spacing="1.1" fill="#5b8cff">KLCP</text>
+</svg>
